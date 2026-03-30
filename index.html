@@ -1,0 +1,1750 @@
+<!DOCTYPE html>
+<html lang="fr" data-theme="light">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Lyna Meryem HAMADOU — Analyste de Données</title>
+<link href="https://fonts.googleapis.com/css2?family=Urbanist:wght@300;400;500;600;700;800;900&family=Space+Grotesk:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+/* ═══════════════════════════════
+   MODE CLAIR — palette indigo doux
+   Eye-friendly, moderne, pro
+═══════════════════════════════ */
+:root {
+  --bg:    #f9f9f7;
+  --bg2:   #ffffff;
+  --bg3:   #f2f2f0;
+  --bg4:   #e8e8e4;
+
+  --txt:   #16181f;
+  --txt2:  #4a4d60;
+  --txt3:  #909298;
+  --dim:   #c4c6cc;
+
+  /* Air France — bleu & rouge AFFIRMÉS */
+  --c1:    #005bac;   /* bleu AF officiel fort */
+  --c2:    #003f80;   /* bleu AF profond */
+  --c3:    #e2001a;   /* rouge AF officiel */
+  --c4:    #4d8fd6;   /* bleu clair */
+
+  --grad:       linear-gradient(135deg,#005bac 0%,#e2001a 100%);
+  --grad-soft:  linear-gradient(135deg,#005bac 0%,#0070cc 100%);
+  --grad-txt:   linear-gradient(135deg,#005bac,#e2001a);
+  --grad-hero:  linear-gradient(135deg,#005bac 0%,#e2001a 100%);
+
+  --border:  rgba(0,91,172,.1);
+  --border2: rgba(0,91,172,.2);
+  --sh:      0 2px 16px rgba(0,91,172,.09);
+  --sh-lg:   0 12px 40px rgba(0,91,172,.25);
+  --sh-card: 0 4px 24px rgba(0,91,172,.1);
+
+  --tog-bg:  #d8e8f5;
+  --tog-dot: #005bac;
+
+  --font:'Urbanist',sans-serif;
+  --alt:'Space Grotesk',sans-serif;
+  --mono:'JetBrains Mono',monospace;
+  --r:14px; --rl:22px;
+  color-scheme:light;
+}
+
+/* ═══════════════════════════════
+   MODE SOMBRE
+═══════════════════════════════ */
+[data-theme="dark"] {
+  --bg:    #0c0e14;
+  --bg2:   #13161e;
+  --bg3:   #1c1f2a;
+  --bg4:   #252836;
+
+  --txt:   #eceef5;
+  --txt2:  #9598b0;
+  --txt3:  #555870;
+  --dim:   #333648;
+
+  --c1:    #4d8fd6;
+  --c2:    #005bac;
+  --c3:    #80b4e8;
+  --c4:    #b3d4f5;
+
+  --grad:       linear-gradient(135deg,#4d8fd6 0%,#ff4455 100%);
+  --grad-soft:  linear-gradient(135deg,#80b4e8 0%,#4d8fd6 100%);
+  --grad-txt:   linear-gradient(135deg,#80b4e8,#ffb3b8);
+  --grad-hero:  linear-gradient(135deg,#4d8fd6 0%,#ff4455 100%);
+
+  --border:  rgba(77,143,214,.1);
+  --border2: rgba(77,143,214,.22);
+  --sh:      0 2px 16px rgba(0,0,0,.35);
+  --sh-lg:   0 12px 40px rgba(77,143,214,.22);
+  --sh-card: 0 4px 24px rgba(0,0,0,.35);
+
+  --tog-bg:  #1c2d45;
+  --tog-dot: #4d8fd6;
+  color-scheme:dark;
+}
+
+/* ═══════════════════════════════
+   BASE & RESET
+═══════════════════════════════ */
+*{margin:0;padding:0;box-sizing:border-box;}
+html{scroll-behavior:smooth;}
+body{
+  background:var(--bg);color:var(--txt);
+  font-family:var(--font);overflow-x:hidden;
+  cursor:none;
+  transition:background .45s,color .45s;
+}
+
+/* CURSEUR */
+#cd,#cr{position:fixed;pointer-events:none;z-index:9999;top:0;left:0;}
+#cd div{
+  width:8px;height:8px;background:var(--c1);border-radius:50%;
+  transform:translate(-50%,-50%);transition:background .45s;
+}
+#cr div{
+  width:34px;height:34px;border:1.5px solid var(--c1);border-radius:50%;
+  transform:translate(-50%,-50%);
+  transition:width .18s,height .18s,opacity .18s,border-color .45s;opacity:.38;
+}
+
+/* AMBIENT GLOW */
+body::before{
+  content:'';position:fixed;inset:0;pointer-events:none;z-index:0;
+  background:
+    radial-gradient(ellipse 50% 40% at 85% 10%,rgba(0,91,172,.1) 0%,transparent 60%),
+    radial-gradient(ellipse 35% 30% at 10% 90%,rgba(226,0,26,.06) 0%,transparent 60%);
+  transition:opacity .45s;
+}
+[data-theme="dark"] body::before{
+  background:
+    radial-gradient(ellipse 50% 40% at 85% 10%,rgba(77,143,214,.14) 0%,transparent 60%),
+    radial-gradient(ellipse 35% 30% at 10% 90%,rgba(255,68,85,.08) 0%,transparent 60%);
+}
+
+/* GRILLE FOND */
+body::after{
+  content:'';position:fixed;inset:0;pointer-events:none;z-index:0;
+  background-image:
+    linear-gradient(var(--border) 1px,transparent 1px),
+    linear-gradient(90deg,var(--border) 1px,transparent 1px);
+  background-size:54px 54px;
+}
+section{position:relative;z-index:1;}
+
+/* ═══════════════════════════════
+   ANIMATIONS
+═══════════════════════════════ */
+@keyframes monter     {from{opacity:0;transform:translateY(26px)}to{opacity:1;transform:translateY(0)}}
+@keyframes glisser-g  {from{opacity:0;transform:translateX(-26px)}to{opacity:1;transform:translateX(0)}}
+@keyframes glisser-d  {from{opacity:0;transform:translateX(26px)}to{opacity:1;transform:translateX(0)}}
+@keyframes apparaitre {from{opacity:0}to{opacity:1}}
+@keyframes pulse      {0%,100%{opacity:1;transform:scale(1)}50%{opacity:.2;transform:scale(.6)}}
+@keyframes float      {0%,100%{transform:translateY(0)}50%{transform:translateY(-10px)}}
+@keyframes surgir     {0%{transform:scale(0) rotate(-10deg)}60%{transform:scale(1.15) rotate(3deg)}100%{transform:scale(1) rotate(0)}}
+@keyframes shimmer    {0%{left:-100%}100%{left:100%}}
+@keyframes spin-lent  {to{transform:rotate(360deg)}}
+@keyframes barre-entr {from{transform:scaleX(0)}to{transform:scaleX(1)}}
+
+/* classes scroll-reveal */
+.app   {opacity:0;transform:translateY(24px);transition:opacity .7s cubic-bezier(.22,1,.36,1),transform .7s cubic-bezier(.22,1,.36,1);}
+.app-g {opacity:0;transform:translateX(-24px);transition:opacity .7s cubic-bezier(.22,1,.36,1),transform .7s cubic-bezier(.22,1,.36,1);}
+.app-d {opacity:0;transform:translateX(24px);transition:opacity .7s cubic-bezier(.22,1,.36,1),transform .7s cubic-bezier(.22,1,.36,1);}
+.app-z {opacity:0;transform:scale(.94);transition:opacity .7s cubic-bezier(.22,1,.36,1),transform .7s cubic-bezier(.22,1,.36,1);}
+.app.v,.app-g.v,.app-d.v,.app-z.v{opacity:1;transform:none;}
+
+/* délais staggerés */
+.d1{transition-delay:.05s}.d2{transition-delay:.12s}.d3{transition-delay:.19s}.d4{transition-delay:.26s}.d5{transition-delay:.33s}.d6{transition-delay:.4s}
+
+/* ═══════════════════════════════
+   NAV
+═══════════════════════════════ */
+nav{
+  position:fixed;top:0;left:0;right:0;z-index:200;
+  display:flex;align-items:center;justify-content:space-between;
+  padding:16px 52px;
+  transition:background .35s,border-color .35s;
+  border-bottom:1px solid transparent;
+}
+nav.collée{border-color:var(--border);}
+[data-theme="light"] nav.collée{background:rgba(246,247,251,.95);backdrop-filter:blur(22px);}
+[data-theme="dark"]  nav.collée{background:rgba(13,14,26,.95);backdrop-filter:blur(22px);}
+
+.logo{
+  font-family:var(--font);font-size:15px;font-weight:800;
+  color:var(--txt);text-decoration:none;
+  display:flex;align-items:center;gap:6px;
+}
+.logo-dot{
+  width:7px;height:7px;background:var(--grad);
+  border-radius:50%;display:inline-block;
+  animation:pulse 2.4s ease infinite;
+}
+.nav-liens{display:flex;gap:28px;}
+.nav-liens a{
+  font-family:var(--alt);font-size:11px;font-weight:500;
+  color:var(--txt3);text-decoration:none;
+  letter-spacing:.07em;text-transform:uppercase;
+  transition:color .2s;position:relative;
+}
+.nav-liens a::after{
+  content:'';position:absolute;bottom:-4px;left:0;
+  width:0;height:2px;background:var(--grad);border-radius:2px;
+  transition:width .3s cubic-bezier(.22,1,.36,1);
+}
+.nav-liens a:hover{color:var(--txt);}
+.nav-liens a:hover::after{width:100%;}
+.nav-dr{display:flex;align-items:center;gap:14px;}
+
+/* toggle */
+.toggle{display:flex;align-items:center;gap:7px;cursor:none;}
+.tog-p{width:42px;height:22px;background:var(--tog-bg);border-radius:100px;position:relative;border:1px solid var(--border2);transition:background .45s;}
+.tog-t{position:absolute;top:2px;left:2px;width:16px;height:16px;background:var(--tog-dot);border-radius:50%;transition:transform .32s cubic-bezier(.34,1.56,.64,1),background .45s;box-shadow:0 1px 4px rgba(0,0,0,.2);}
+[data-theme="dark"] .tog-t{transform:translateX(20px);}
+.tog-i{font-size:12px;user-select:none;}
+
+.btn-nav{
+  font-family:var(--font);font-size:11px;font-weight:700;
+  letter-spacing:.05em;padding:9px 20px;
+  background:var(--grad);color:#fff;
+  border:none;border-radius:100px;text-decoration:none;cursor:none;
+  transition:transform .2s,box-shadow .2s;
+  position:relative;overflow:hidden;
+}
+.btn-nav::before{content:'';position:absolute;top:0;left:-100%;width:100%;height:100%;background:linear-gradient(90deg,transparent,rgba(255,255,255,.2),transparent);transition:left .5s;}
+.btn-nav:hover::before{left:100%;}
+.btn-nav:hover{transform:translateY(-2px);box-shadow:var(--sh-lg);}
+
+/* ═══════════════════════════════
+   HERO
+═══════════════════════════════ */
+#hero{
+  min-height:100vh;
+  display:grid;grid-template-columns:1fr 380px;
+  align-items:center;
+  padding:120px 52px 80px;gap:48px;overflow:hidden;
+}
+
+.dispo{
+  display:inline-flex;align-items:center;gap:8px;
+  font-family:var(--mono);font-size:11px;color:var(--c1);
+  border:1.5px solid var(--c1);background:rgba(0,91,172,.08);
+  padding:6px 16px;border-radius:100px;margin-bottom:26px;
+  animation:monter .7s ease both;
+}
+.dispo::before{content:'';width:6px;height:6px;background:var(--c3);border-radius:50%;animation:pulse 2s ease infinite;}
+
+h1{
+  font-family:var(--font);
+  font-size:clamp(48px,6vw,82px);
+  font-weight:900;line-height:.97;letter-spacing:-.04em;
+  margin-bottom:14px;animation:monter .7s .07s ease both;
+}
+.n1{display:block;color:var(--txt);}
+.n2{display:block;background:var(--grad-hero);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
+
+.h-role{
+  font-family:var(--alt);font-size:clamp(12px,1.3vw,14px);font-weight:600;
+  color:var(--txt3);letter-spacing:.1em;text-transform:uppercase;
+  margin-bottom:20px;animation:monter .7s .14s ease both;
+}
+.h-desc{
+  font-family:var(--alt);font-size:15.5px;line-height:1.78;
+  color:var(--txt2);max-width:500px;margin-bottom:34px;
+  animation:monter .7s .2s ease both;
+}
+.h-desc strong{color:var(--txt);font-weight:600;}
+
+.ctas{display:flex;gap:10px;flex-wrap:wrap;animation:monter .7s .26s ease both;}
+.btn-p{
+  display:inline-flex;align-items:center;gap:8px;
+  padding:13px 24px;background:var(--grad);color:#fff;
+  font-family:var(--font);font-size:14px;font-weight:700;
+  border:none;border-radius:100px;text-decoration:none;cursor:none;
+  transition:transform .2s,box-shadow .2s;
+  position:relative;overflow:hidden;
+}
+.btn-p::before{content:'';position:absolute;top:0;left:-100%;width:100%;height:100%;background:linear-gradient(90deg,transparent,rgba(255,255,255,.18),transparent);transition:left .5s;}
+.btn-p:hover::before{left:100%;}
+.btn-p:hover{transform:translateY(-2px);box-shadow:var(--sh-lg);}
+.btn-b{
+  display:inline-flex;align-items:center;gap:8px;
+  padding:12px 22px;background:transparent;color:var(--txt);
+  font-family:var(--font);font-size:14px;font-weight:600;
+  border:1.5px solid var(--border2);border-radius:100px;
+  text-decoration:none;cursor:none;
+  transition:border-color .2s,background .2s,color .45s;
+}
+.btn-b:hover{border-color:var(--c1);background:rgba(0,91,172,.06);}
+.btn-b svg,.btn-p svg{width:14px;height:14px;fill:currentColor;flex-shrink:0;}
+
+.badges{display:flex;gap:7px;flex-wrap:wrap;margin-top:20px;animation:monter .7s .32s ease both;}
+.badge{
+  font-family:var(--mono);font-size:9.5px;padding:5px 12px;
+  border-radius:100px;border:1px solid var(--border2);
+  color:var(--txt3);background:var(--bg3);transition:all .45s;
+}
+.badge.c{border-color:rgba(0,91,172,.5);color:var(--c1);background:rgba(0,91,172,.08);}
+
+/* cartes hero droite */
+.h-dr{display:flex;flex-direction:column;gap:11px;animation:glisser-d .8s .3s ease both;}
+.hc{
+  background:var(--bg2);border:1px solid var(--border);
+  border-radius:var(--r);padding:16px 18px;
+  box-shadow:var(--sh);
+  transition:border-color .25s,transform .25s,background .45s;
+}
+.hc:hover{border-color:rgba(0,91,172,.3);transform:translateX(-3px);}
+.hc-l{font-family:var(--mono);font-size:9px;color:var(--dim);letter-spacing:.1em;text-transform:uppercase;margin-bottom:4px;}
+.hc-v{font-family:var(--font);font-size:15px;font-weight:800;color:var(--txt);line-height:1.2;}
+.hc-v.a{background:var(--grad-txt);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
+.hc-s{font-family:var(--alt);font-size:11px;color:var(--txt3);margin-top:3px;}
+
+/* ═══════════════════════════════
+   EN-TÊTES SECTION
+═══════════════════════════════ */
+.sh{display:flex;align-items:center;gap:14px;margin-bottom:48px;}
+.sh-n{font-family:var(--mono);font-size:10px;color:var(--c1);opacity:.9;letter-spacing:.08em;}
+.sh-t{font-family:var(--font);font-size:30px;font-weight:900;letter-spacing:-.03em;}
+.sh-l{flex:1;height:1px;background:var(--border);margin-left:8px;transition:background .45s;}
+.slbl{font-family:var(--mono);font-size:9px;color:var(--txt3);letter-spacing:.1em;text-transform:uppercase;margin-bottom:12px;}
+
+/* ═══════════════════════════════
+   QUI JE SUIS
+═══════════════════════════════ */
+#a-propos{
+  padding:96px 52px;
+  background:var(--bg2);border-top:1px solid var(--border);border-bottom:1px solid var(--border);
+  transition:background .45s;
+}
+.ap-wrap{display:grid;grid-template-columns:220px 1fr;gap:56px;align-items:start;}
+
+/* photo */
+.photo-frame{
+  width:220px;height:270px;border-radius:24px;overflow:hidden;
+  border:2px solid var(--border2);box-shadow:var(--sh-lg);
+  animation:float 6s ease-in-out infinite;position:relative;
+}
+.photo-frame img{width:100%;height:100%;object-fit:cover;object-position:center top;}
+.photo-frame::after{content:'';position:absolute;inset:0;background:linear-gradient(180deg,transparent 65%,rgba(0,91,172,.08) 100%);}
+.photo-tag{margin-top:11px;font-family:var(--mono);font-size:9px;color:var(--c1);text-align:center;letter-spacing:.07em;}
+
+.ap-p{font-family:var(--alt);font-size:15px;color:var(--txt2);line-height:1.85;margin-bottom:14px;}
+.ap-p strong{color:var(--txt);font-weight:600;}
+
+/* frise */
+.frise{display:flex;flex-direction:column;}
+.fr-i{display:flex;gap:14px;padding-bottom:22px;position:relative;}
+.fr-i:not(:last-child)::before{content:'';position:absolute;left:13px;top:29px;bottom:0;width:1px;background:var(--border);}
+.fr-ico{
+  width:27px;height:27px;border-radius:50%;
+  display:flex;align-items:center;justify-content:center;
+  font-size:11px;flex-shrink:0;
+  background:var(--bg3);border:1px solid var(--border2);
+  transition:background .45s;
+}
+.fr-b{flex:1;}
+.fr-p{font-family:var(--mono);font-size:9px;color:var(--dim);letter-spacing:.06em;margin-bottom:1px;}
+.fr-co{font-family:var(--font);font-size:11px;font-weight:800;color:var(--c1);margin-bottom:1px;}
+.fr-r{font-family:var(--font);font-size:13px;font-weight:700;color:var(--txt);margin-bottom:3px;}
+.fr-d{font-family:var(--alt);font-size:11px;color:var(--txt2);line-height:1.6;}
+
+/* formations */
+.form-row{display:grid;grid-template-columns:1fr 1fr;gap:9px;margin-top:10px;}
+.fc{background:var(--bg3);border:1px solid var(--border);border-radius:var(--r);padding:13px 15px;transition:border-color .2s,background .45s;}
+.fc:hover{border-color:rgba(0,91,172,.3);}
+.fc-e{font-family:var(--mono);font-size:9px;color:var(--c3);letter-spacing:.05em;margin-bottom:3px;}
+.fc-d{font-family:var(--font);font-size:12px;font-weight:800;color:var(--txt);margin-bottom:2px;}
+.fc-s{font-family:var(--alt);font-size:10.5px;color:var(--txt3);}
+
+.fc-star{border-color:rgba(0,91,172,.35) !important;background:linear-gradient(135deg,rgba(0,91,172,.06),rgba(0,91,172,.04)) !important;}
+.fc-star .fc-e{color:var(--c1) !important;font-weight:700;}
+
+  display:flex;align-items:center;gap:12px;padding:13px 16px;
+  background:var(--bg3);border:1px solid var(--border2);
+  border-radius:var(--r);text-decoration:none;color:var(--txt);
+  margin-top:18px;transition:border-color .2s,transform .25s,background .45s;
+}
+.btn-cv:hover{border-color:var(--c1);transform:translateX(4px);}
+.cv-i{width:34px;height:34px;border-radius:9px;background:rgba(0,91,172,.1);display:flex;align-items:center;justify-content:center;font-size:15px;flex-shrink:0;}
+.cv-t{font-family:var(--font);font-size:13px;font-weight:800;}
+.cv-s{font-family:var(--mono);font-size:9px;color:var(--dim);}
+.cv-arr{margin-left:auto;color:var(--dim);transition:color .2s,transform .2s;}
+.btn-cv:hover .cv-arr{color:var(--c1);transform:translateX(4px);}
+
+/* ═══════════════════════════════
+   PROJETS
+═══════════════════════════════ */
+#projets{
+  padding:96px 52px;
+  background:var(--bg2);border-top:1px solid var(--border);border-bottom:1px solid var(--border);
+  transition:background .45s;
+}
+.note{
+  font-family:var(--mono);font-size:10.5px;color:var(--txt2);
+  margin-bottom:38px;padding:12px 17px;
+  background:rgba(0,91,172,.06);border:1px solid rgba(0,91,172,.2);
+  border-radius:10px;line-height:1.75;
+}
+.note code{color:var(--c1);}
+
+.pgrid{display:grid;grid-template-columns:repeat(3,1fr);gap:15px;}
+.pc{
+  background:var(--bg);border:1px solid var(--border);
+  border-radius:var(--rl);overflow:hidden;
+  display:flex;flex-direction:column;
+  box-shadow:var(--sh-card);
+  transition:border-color .3s,transform .35s cubic-bezier(.22,1,.36,1),box-shadow .35s,background .45s;
+}
+.pc:hover{border-color:rgba(0,91,172,.3);transform:translateY(-6px);box-shadow:var(--sh-lg);}
+.pc.G{grid-column:span 2;}
+
+.vign{height:188px;overflow:hidden;position:relative;flex-shrink:0;background:var(--bg3);}
+.pc.G .vign{height:220px;}
+.cap{width:100%;height:100%;object-fit:cover;object-position:top;display:block;transition:transform .6s cubic-bezier(.22,1,.36,1);}
+.pc:hover .cap{transform:scale(1.05);}
+.vign::after{content:'';position:absolute;inset:0;background:linear-gradient(180deg,transparent 50%,var(--bg) 100%);pointer-events:none;}
+.ph{width:100%;height:100%;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:7px;}
+.ph-i{font-size:22px;opacity:.28;}
+.ph-t{font-family:var(--mono);font-size:8px;color:var(--dim);text-align:center;line-height:1.7;}
+
+.pb{padding:18px;display:flex;flex-direction:column;flex:1;}
+.étqs{display:flex;gap:4px;flex-wrap:wrap;margin-bottom:8px;}
+.étq{
+  font-family:var(--mono);font-size:7.5px;padding:2.5px 7px;
+  border-radius:100px;letter-spacing:.04em;text-transform:uppercase;
+  background:rgba(0,91,172,.08);color:var(--c1);
+  border:1px solid rgba(0,91,172,.08);
+}
+.pt{font-family:var(--font);font-size:14px;font-weight:800;margin-bottom:6px;letter-spacing:-.01em;}
+.pd{font-family:var(--alt);font-size:11px;color:var(--txt2);line-height:1.65;flex:1;}
+.pile{display:flex;gap:3px;flex-wrap:wrap;margin-top:8px;}
+.pp-t{font-family:var(--mono);font-size:7.5px;padding:2px 6px;border-radius:4px;background:var(--bg3);color:var(--txt3);border:1px solid var(--border);}
+.mét{display:flex;gap:12px;margin-top:10px;padding-top:10px;border-top:1px solid var(--border);}
+.mv{font-family:var(--mono);font-size:11px;font-weight:700;background:var(--grad-txt);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
+.ml{font-family:var(--alt);font-size:8.5px;color:var(--dim);}
+.pp{display:flex;align-items:center;justify-content:space-between;margin-top:11px;padding-top:10px;border-top:1px solid var(--border);}
+.ghl{display:inline-flex;align-items:center;gap:5px;padding:6px 10px;background:var(--bg3);border:1px solid var(--border2);border-radius:7px;font-family:var(--mono);font-size:9px;font-weight:600;color:var(--txt2);text-decoration:none;transition:border-color .2s,color .2s,background .45s;}
+.ghl:hover{border-color:var(--c1);color:var(--c1);}
+.ghl svg{width:10px;height:10px;fill:currentColor;}
+.rb{font-family:var(--mono);font-size:8.5px;color:var(--dim);}
+
+/* ═══════════════════════════════
+   COMPÉTENCES (après projets)
+═══════════════════════════════ */
+#competences{padding:96px 52px;}
+
+/* 5 cartes : gestion projet mise en avant */
+.cgrid{display:grid;grid-template-columns:repeat(3,1fr);gap:13px;margin-bottom:24px;}
+.cgrid .cc-star{grid-column:span 1;}
+
+.cc{
+  background:var(--bg2);border:1px solid var(--border);
+  border-radius:var(--r);padding:22px;
+  box-shadow:var(--sh-card);
+  transition:border-color .28s,transform .28s,background .45s,box-shadow .28s;
+  position:relative;overflow:hidden;
+}
+.cc::before{
+  content:'';position:absolute;top:0;left:0;right:0;height:3px;
+  background:var(--grad);opacity:0;transition:opacity .28s;
+}
+.cc:hover{border-color:rgba(0,91,172,.35);transform:translateY(-4px);box-shadow:var(--sh-lg);}
+.cc:hover::before{opacity:1;}
+
+/* carte mise en avant — gestion projet */
+.cc.vedette{
+  border-color:rgba(0,91,172,.3);
+  background:linear-gradient(135deg,rgba(0,91,172,.08) 0%,rgba(0,91,172,.04) 100%);
+}
+.cc.vedette::before{opacity:1;}
+.vedette-badge{
+  position:absolute;top:14px;right:14px;
+  font-family:var(--mono);font-size:8px;font-weight:700;
+  padding:3px 8px;border-radius:100px;
+  background:var(--grad);color:#fff;
+  letter-spacing:.06em;
+}
+
+.cc-i{width:36px;height:36px;border-radius:10px;background:rgba(0,91,172,.1);display:flex;align-items:center;justify-content:center;font-size:17px;margin-bottom:12px;}
+.cc h3{font-family:var(--font);font-size:13px;font-weight:800;margin-bottom:4px;}
+.cc p{font-family:var(--alt);font-size:11px;color:var(--txt2);line-height:1.6;}
+.barre{margin-top:12px;height:3px;background:var(--bg4);border-radius:2px;overflow:hidden;}
+.bf{height:100%;border-radius:2px;background:var(--grad-soft);width:0;transition:width 1.5s cubic-bezier(.22,1,.36,1);}
+
+/* deuxième rangée */
+.cgrid2{display:grid;grid-template-columns:repeat(4,1fr);gap:13px;margin-bottom:24px;}
+
+.certs{display:flex;gap:8px;flex-wrap:wrap;}
+.cert{
+  display:flex;align-items:center;gap:7px;padding:9px 14px;
+  background:var(--bg2);border:1px solid var(--border);
+  border-radius:var(--r);font-family:var(--alt);font-size:11.5px;font-weight:500;
+  box-shadow:var(--sh);transition:border-color .2s,background .45s,transform .2s;
+}
+.cert:hover{border-color:rgba(0,91,172,.35);transform:translateY(-2px);}
+
+/* ═══════════════════════════════
+   STACK
+═══════════════════════════════ */
+#stack{
+  padding:80px 52px;
+  background:var(--bg2);border-top:1px solid var(--border);border-bottom:1px solid var(--border);
+  transition:background .45s;
+}
+.sgrid{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;}
+.sc{background:var(--bg3);border:1px solid var(--border);border-radius:var(--r);padding:18px;transition:background .45s;}
+.sc h4{font-family:var(--font);font-size:11px;font-weight:800;color:var(--c1);letter-spacing:.06em;text-transform:uppercase;margin-bottom:12px;}
+.sl2{display:flex;flex-direction:column;gap:7px;}
+.si{font-family:var(--alt);font-size:11.5px;color:var(--txt2);display:flex;align-items:center;gap:7px;}
+.si::before{content:'';width:3px;height:3px;border-radius:50%;background:var(--c3);flex-shrink:0;}
+
+/* ═══════════════════════════════
+   CONTACT
+═══════════════════════════════ */
+#contact{padding:96px 52px;transition:background .45s;}
+.cgr{display:grid;grid-template-columns:1fr 1fr;gap:52px;align-items:start;}
+.cg h2{font-family:var(--font);font-size:36px;font-weight:900;letter-spacing:-.03em;line-height:1.05;margin-bottom:12px;}
+.cg h2 span{background:var(--grad-txt);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
+.cg p{font-family:var(--alt);font-size:14px;color:var(--txt2);line-height:1.8;margin-bottom:26px;}
+.ct-ls{display:flex;flex-direction:column;gap:8px;}
+.ct-l{
+  display:flex;align-items:center;gap:11px;padding:12px 14px;
+  background:var(--bg3);border:1px solid var(--border);
+  border-radius:var(--r);text-decoration:none;color:var(--txt);
+  transition:border-color .2s,transform .25s,background .45s;
+}
+.ct-l:hover{border-color:rgba(0,91,172,.5);transform:translateX(5px);}
+.ct-i{width:30px;height:30px;background:rgba(0,91,172,.1);border-radius:7px;display:flex;align-items:center;justify-content:center;font-size:13px;flex-shrink:0;}
+.ct-i svg{width:13px;height:13px;fill:currentColor;}
+.ct-n{font-family:var(--font);font-size:12px;font-weight:700;}
+.ct-h{font-family:var(--mono);font-size:9.5px;color:var(--dim);}
+.ct-arr{margin-left:auto;color:var(--dim);transition:color .2s,transform .2s;}
+.ct-l:hover .ct-arr{color:var(--c1);transform:translateX(3px);}
+
+.form{display:flex;flex-direction:column;gap:11px;}
+.ch{display:flex;flex-direction:column;gap:4px;}
+.ch label{font-family:var(--mono);font-size:9px;color:var(--txt3);font-weight:600;letter-spacing:.1em;text-transform:uppercase;}
+.ch input,.ch textarea,.ch select{
+  background:var(--bg3);border:1px solid var(--border);border-radius:var(--r);
+  padding:11px 13px;color:var(--txt);font-family:var(--alt);font-size:13px;
+  outline:none;resize:none;
+  transition:border-color .2s,box-shadow .2s,background .45s,color .45s;
+}
+.ch input::placeholder,.ch textarea::placeholder{color:var(--dim);}
+.ch input:focus,.ch textarea:focus,.ch select:focus{border-color:var(--c1);box-shadow:0 0 0 3px rgba(0,91,172,.1);}
+.ch select option{background:var(--bg3);}
+.ch textarea{height:100px;}
+.row2{display:grid;grid-template-columns:1fr 1fr;gap:11px;}
+.btn-env{
+  display:flex;align-items:center;justify-content:center;gap:9px;
+  padding:14px;background:var(--grad);color:#fff;
+  font-family:var(--font);font-size:13px;font-weight:800;
+  border:none;border-radius:100px;cursor:none;
+  transition:transform .2s,box-shadow .2s;
+  letter-spacing:.02em;position:relative;overflow:hidden;
+}
+.btn-env::before{content:'';position:absolute;top:0;left:-100%;width:100%;height:100%;background:linear-gradient(90deg,transparent,rgba(255,255,255,.16),transparent);transition:left .5s;}
+.btn-env:hover::before{left:100%;}
+.btn-env:hover{transform:translateY(-2px);box-shadow:var(--sh-lg);}
+.suc{display:none;flex-direction:column;align-items:center;justify-content:center;gap:11px;padding:46px 24px;background:rgba(0,91,172,.06);border:1px solid rgba(0,91,172,.08);border-radius:var(--rl);text-align:center;}
+.suc.v{display:flex;}
+.suc-i{font-size:42px;animation:surgir .5s ease;}
+.suc h3{font-family:var(--font);font-size:17px;font-weight:900;background:var(--grad-txt);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
+.suc p{font-family:var(--alt);font-size:11.5px;color:var(--txt2);}
+
+/* FOOTER */
+footer{padding:26px 52px;border-top:1px solid var(--border);display:flex;align-items:center;justify-content:space-between;position:relative;z-index:1;}
+.f-logo{font-family:var(--font);font-size:12px;font-weight:800;color:var(--txt);}
+.f-gh{display:flex;align-items:center;gap:5px;font-family:var(--mono);font-size:10px;color:var(--txt3);text-decoration:none;transition:color .2s;}
+.f-gh:hover{color:var(--c1);}
+.f-gh svg{width:12px;height:12px;fill:currentColor;}
+.f-copy{font-family:var(--alt);font-size:10px;color:var(--dim);}
+
+/* carte Dauphine — sobre bleu AF */
+.hc-star{
+  border-color:rgba(0,91,172,.35) !important;
+  background:rgba(0,91,172,.06);
+  position:relative;overflow:hidden;
+}
+.hc-star::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;background:var(--grad-soft);}
+
+/* carte Air France — COULEURS FORTES */
+.hc-af{
+  border-color:#005bac !important;
+  border-width:2px !important;
+  background:linear-gradient(135deg,rgba(0,91,172,.1),rgba(226,0,26,.06));
+}
+.hc-af-txt{
+  background:linear-gradient(135deg,#005bac,#e2001a) !important;
+  -webkit-background-clip:text !important;
+  -webkit-text-fill-color:transparent !important;
+  background-clip:text !important;
+  font-size:17px !important;
+}
+
+/* carte formation Dauphine */
+.fc-star{border-color:rgba(0,91,172,.3) !important;background:rgba(0,91,172,.05) !important;}
+.fc-star .fc-e{color:var(--c1) !important;font-weight:700;}
+
+/* ═══ CARROUSEL AIR FRANCE ═══ */
+.carrousel{position:relative;width:100%;border-radius:var(--r);overflow:hidden;background:var(--bg3);border:1px solid var(--border2);}
+.car-track{display:flex;transition:transform .45s cubic-bezier(.22,1,.36,1);}
+.car-slide{min-width:100%;height:220px;position:relative;flex-shrink:0;}
+.car-slide img{width:100%;height:100%;object-fit:cover;object-position:top;display:block;}
+.car-ph{width:100%;height:100%;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:7px;background:var(--bg3);}
+.car-ph-i{font-size:26px;opacity:.3;}
+.car-ph-t{font-family:var(--mono);font-size:8.5px;color:var(--dim);text-align:center;line-height:1.7;}
+/* overlay sombre bas */
+.car-slide::after{content:'';position:absolute;inset:0;background:linear-gradient(180deg,transparent 55%,var(--bg3) 100%);pointer-events:none;}
+/* flèches */
+.car-btn{
+  position:absolute;top:50%;transform:translateY(-50%);
+  width:30px;height:30px;border-radius:50%;
+  background:rgba(0,91,172,.85);color:#fff;
+  border:none;cursor:pointer;
+  display:flex;align-items:center;justify-content:center;
+  font-size:14px;z-index:10;
+  transition:background .2s,transform .2s;
+  backdrop-filter:blur(4px);
+}
+.car-btn:hover{background:var(--c1);transform:translateY(-50%) scale(1.1);}
+.car-prev{left:8px;}
+.car-next{right:8px;}
+/* points */
+.car-dots{display:flex;gap:5px;justify-content:center;padding:8px 0 4px;}
+.car-dot{width:6px;height:6px;border-radius:50%;background:var(--dim);border:none;cursor:pointer;transition:background .2s,transform .2s;}
+.car-dot.active{background:var(--c1);transform:scale(1.3);}
+/* caption slide */
+.car-caption{
+  position:absolute;bottom:8px;left:10px;right:10px;
+  font-family:var(--mono);font-size:8.5px;color:rgba(255,255,255,.75);
+  z-index:5;
+}
+
+/* ═══ TERMINAL HACKER ═══ */
+.terminal-wrap{
+  max-width:780px;
+  border-radius:14px;
+  overflow:hidden;
+  box-shadow:0 24px 64px rgba(0,0,0,.25);
+  border:1px solid rgba(255,255,255,.06);
+  font-family:var(--mono);
+}
+.term-topbar{
+  display:flex;align-items:center;justify-content:space-between;
+  padding:12px 16px;
+  background:#1e1e1e;
+  border-bottom:1px solid rgba(255,255,255,.07);
+}
+.term-dots{display:flex;gap:6px;}
+.td{width:12px;height:12px;border-radius:50%;display:inline-block;}
+.td-red{background:#ff5f57;}
+.td-yellow{background:#ffbd2e;}
+.td-green{background:#28c840;}
+.term-title{
+  font-family:var(--mono);font-size:11px;
+  color:rgba(255,255,255,.45);letter-spacing:.04em;
+}
+.term-body{
+  background:#0d1117;
+  padding:24px 28px;
+  min-height:320px;
+  font-size:13px;
+  line-height:1.75;
+  color:#e6edf3;
+  position:relative;
+  overflow:hidden;
+}
+.term-line{white-space:pre-wrap;word-break:break-word;}
+/* couleurs syntaxe */
+.t-prompt {color:#58a6ff;}         /* bleu — prompt */
+.t-cmd    {color:#79c0ff;}         /* bleu clair — commandes */
+.t-string {color:#a5d6ff;}         /* bleu pâle — strings */
+.t-kw     {color:#ff7b72;}         /* rouge — keywords python */
+.t-fn     {color:#d2a8ff;}         /* violet — fonctions */
+.t-num    {color:#79c0ff;}         /* bleu — nombres */
+.t-comment{color:#8b949e;}         /* gris — commentaires */
+.t-green  {color:#56d364;}         /* vert — succès */
+.t-yellow {color:#e3b341;}         /* jaune — warnings/labels */
+.t-af     {color:#58a6ff;font-weight:700;} /* bleu AF */
+.t-blank  {display:block;height:.8em;}
+.term-cursor{
+  display:inline-block;width:9px;height:16px;
+  background:#58a6ff;
+  animation:cligno .9s step-end infinite;
+  vertical-align:text-bottom;margin-left:1px;
+}
+@keyframes cligno{0%,100%{opacity:1}50%{opacity:0}}
+
+/* ═══ GRAPHIQUES DATA ═══ */
+.chart-card{background:var(--bg3);border:1px solid var(--border);border-radius:var(--r);padding:20px;box-shadow:var(--sh);transition:background .4s;}
+.chart-title{font-family:var(--font);font-size:13px;font-weight:800;color:var(--txt);margin-bottom:3px;}
+.chart-subtitle{font-family:var(--mono);font-size:9px;color:var(--txt3);letter-spacing:.05em;margin-bottom:12px;}
+#chartVentes,#chartGauss{width:100%;height:auto;display:block;border-radius:6px;}
+
+::-webkit-scrollbar{width:3px;}
+.stat-box{
+  text-align:center;
+  padding:28px 16px;
+  background:rgba(255,255,255,.1);
+  border:1px solid rgba(255,255,255,.18);
+  border-radius:var(--rl);
+  backdrop-filter:blur(8px);
+  transition:transform .3s,background .3s;
+}
+.stat-box:hover{transform:translateY(-5px);background:rgba(255,255,255,.16);}
+.stat-num{
+  font-family:var(--font);
+  font-size:clamp(28px,4vw,48px);
+  font-weight:900;
+  color:#fff;
+  line-height:1;
+  margin-bottom:10px;
+  letter-spacing:-.02em;
+}
+.stat-lbl{
+  font-family:var(--alt);
+  font-size:12px;
+  color:rgba(255,255,255,.7);
+  font-weight:500;
+  line-height:1.4;
+}
+
+::-webkit-scrollbar{width:3px;}
+::-webkit-scrollbar-track{background:var(--bg);}
+::-webkit-scrollbar-thumb{background:rgba(0,91,172,.5);border-radius:2px;}
+::-webkit-scrollbar-thumb:hover{background:var(--c1);}
+</style>
+</head>
+<body>
+
+<div id="cd"><div></div></div>
+<div id="cr"><div></div></div>
+
+<!-- ══ NAV ══ -->
+<nav id="nav">
+  <a href="#" class="logo">LMH <span class="logo-dot"></span></a>
+  <div class="nav-liens">
+    <a href="#a-propos">À propos</a>
+    <a href="#projets">Projets</a>
+    <a href="#competences">Compétences</a>
+    <a href="#contact">Contact</a>
+  </div>
+  <div class="nav-dr">
+    <div class="toggle" id="tog">
+      <span class="tog-i">☀️</span>
+      <div class="tog-p"><div class="tog-t"></div></div>
+      <span class="tog-i">🌙</span>
+    </div>
+    <a href="#contact" class="btn-nav">Me recruter →</a>
+  </div>
+</nav>
+
+<!-- ══ HERO ══ -->
+<section id="hero">
+  <div>
+    <div class="dispo">Disponible — CDI Analyste de Données</div>
+    <h1><span class="n1">Lyna Meryem</span><span class="n2">HAMADOU</span></h1>
+    <div class="h-role">Data Analyst · Ingénieure · PMO — Power BI · Python · ML</div>
+    <p class="h-desc">
+      J'analyse, je pilote, je décide — des opérations aériennes chez
+      <strong>Air France</strong> à l'optimisation de la chaîne logistique,
+      je traduis la complexité des données en <strong>actions concrètes</strong>.
+    </p>
+
+    <div class="ctas">
+      <a href="#projets" class="btn-p">Voir mes projets ↓</a>
+      <a href="CV_2026-03-16_Lyna_Meryem_HAMADOU.pdf" download class="btn-b">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4M7 10l5 5 5-5M12 15V3"/></svg>
+        Télécharger CV
+      </a>
+      <a href="https://github.com/lyna-meryem" target="_blank" class="btn-b">
+        <svg viewBox="0 0 24 24"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/></svg>
+        GitHub
+      </a>
+    </div>
+    <div class="badges">
+      <span class="badge c">✈️ Air France</span>
+      <span class="badge c">🏆 PL-300</span>
+      <span class="badge c">☁️ AWS ML</span>
+      <span class="badge">🎓 MBA ESG · ENST Alger</span>
+      <span class="badge">🇫🇷 C2 · 🇬🇧 B2</span>
+    </div>
+  </div>
+  <div class="h-dr">
+    <!-- CARTES INFO -->
+    <div class="hc hc-af">
+      <div class="hc-l">Dernière expérience</div>
+      <div class="hc-v hc-af-txt">Air France ✈️</div>
+      <div class="hc-s">Data Analyste Opérations Aériennes · POC Flight Keys</div>
+    </div>
+    <div class="hc">
+      <div class="hc-l">Double diplôme</div>
+      <div class="hc-v">MBA ESG Paris · 2025–2026</div>
+      <div class="hc-s">PMO/CDO + Big Data & IA</div>
+    </div>
+    <div class="hc hc-star">
+      <div class="hc-l">Master 2 · Dauphine–PSL / Mines</div>
+      <div class="hc-v a">Recherche Opérationnelle · 2023–2024</div>
+      <div class="hc-s">Mathématiques & optimisation · décision</div>
+    </div>
+    <div class="hc">
+      <div class="hc-l">Diplôme d'ingénieure d'État · ENST Alger</div>
+      <div class="hc-v a">Chaîne Logistique · 2022</div>
+      <div class="hc-s">Ingénierie de la Chaîne Logistique</div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ QUI JE SUIS ══ -->
+<section id="a-propos">
+  <div class="sh app"><span class="sh-n">01</span><h2 class="sh-t">Qui je suis</h2><div class="sh-l"></div></div>
+  <div class="ap-wrap">
+    <div class="app-g">
+      <div class="photo-frame"><img src="lyna-photo.jpg" alt="Lyna Meryem HAMADOU"></div>
+      <div class="photo-tag">Lyna Meryem HAMADOU ✦</div>
+    </div>
+    <div>
+      <p class="ap-p app d1">
+        Ingénieure d'État en <strong>Ingénierie de la Chaîne Logistique</strong> (ENST Alger, 2022),
+        titulaire d'un <strong>double diplôme MBA ESG Paris</strong> — PMO/CDO et Big Data & IA —
+        et d'un <strong>Master 2 Recherche Opérationnelle</strong> (Dauphine–PSL / École des Mines).
+      </p>
+
+      <div class="app d3" style="margin-top:22px">
+        <div class="slbl">// Expériences</div>
+        <div class="frise">
+          <div class="fr-i">
+            <div class="fr-ico">✈️</div>
+            <div class="fr-b">
+              <div class="fr-p">Jan. 2025 — Déc. 2025</div>
+              <div class="fr-co">Air France · Roissy CDG</div>
+              <div class="fr-r">Data Analyste — Opérations Aériennes · POC Flight Keys</div>
+              <div class="fr-d">Power BI pilotage IA, coordination parties prenantes, NLP verbatims, reporting COMEX, MLOps.</div>
+            </div>
+          </div>
+          <div class="fr-i">
+            <div class="fr-ico">🗺️</div>
+            <div class="fr-b">
+              <div class="fr-p">Avr. — Sept. 2023</div>
+              <div class="fr-co">Groupe Alten · Sèvres</div>
+              <div class="fr-r">Stagiaire — Ingénieure Recherche Opérationnelle</div>
+              <div class="fr-d">Smart & Green Mobility : SIG → app mobile, heuristiques pour optimiser les déplacements.</div>
+            </div>
+          </div>
+          <div class="fr-i">
+            <div class="fr-ico">💊</div>
+            <div class="fr-b">
+              <div class="fr-p">Mar. — Juil. 2022</div>
+              <div class="fr-co">Laboratoires Merinal · Alger</div>
+              <div class="fr-r">Stagiaire — Ingénieure Supply Chain</div>
+              <div class="fr-d">Optimisation entrepôt : +18 % espace, +25,5 % délai commande via SLA & Order Picking.</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="app d4">
+        <div class="slbl" style="margin-top:6px">// Formations</div>
+        <div class="form-row">
+          <div class="fc">
+            <div class="fc-e">🏗️ ENST Alger · 2022</div>
+            <div class="fc-d">Diplôme d'Ingénieure d'État</div>
+            <div class="fc-s">Ingénierie de la Chaîne Logistique</div>
+          </div>
+          <div class="fc fc-star">
+            <div class="fc-e">🏛️ Dauphine–PSL / École des Mines · 2023–2024</div>
+            <div class="fc-d">Master 2 MODO — Recherche Opérationnelle</div>
+            <div class="fc-s">Mathématiques appliquées à la décision</div>
+          </div>
+          <div class="fc" style="grid-column:span 2">
+            <div class="fc-e">🎓 MBA ESG Paris · 2025–2026</div>
+            <div class="fc-d">Double diplôme PMO/CDO + Big Data & IA</div>
+            <div class="fc-s">Management de Projet · Intelligence Artificielle</div>
+          </div>
+        </div>
+      </div>
+
+      <a href="CV_2026-03-16_Lyna_Meryem_HAMADOU.pdf" download class="btn-cv app d5">
+        <div class="cv-i">📄</div>
+        <div><div class="cv-t">Télécharger mon CV</div><div class="cv-s">CV_Lyna_Meryem_HAMADOU.pdf · Mars 2026</div></div>
+        <div class="cv-arr">↓</div>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- ══ PROJETS ══ -->
+<section id="projets">
+  <div class="sh app"><span class="sh-n">02</span><h2 class="sh-t">Projets & Réalisations</h2><div class="sh-l"></div></div>
+
+  <div class="pgrid">
+
+    <!-- ═══ PROJET 1 — AIR FRANCE avec carrousel (grande carte) ═══ -->
+    <div class="pc G app-z d1">
+      <div class="pb" style="padding:0">
+
+        <!-- CARROUSEL — 5 slides Air France -->
+        <!-- 🖼️ Pour ajouter tes photos : remplace src="" par src="captures/af-1.png" etc. -->
+        <div class="carrousel" id="car-af">
+          <div class="car-track" id="car-af-track">
+
+            <!-- SLIDE 1 -->
+            <div class="car-slide">
+              <img src="captures/airfrance/af-dashboard-1.png"
+      
+                   onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+              <div class="car-ph" style="display:flex">
+                <div class="car-ph-i">📊</div>
+                <div class="car-ph-t">captures/af-dashboard-1.png<br>Vue d'ensemble KPIs</div>
+              </div>
+              <div class="car-caption">Vue d'ensemble — KPIs opérations aériennes</div>
+            </div>
+
+            <!-- SLIDE 2 -->
+            <div class="car-slide">
+              <img src="captures/airfrance/af-dashboard-2.png" alt="Dashboard Power BI Air France 2"
+                   onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+              <div class="car-ph" style="display:flex">
+                <div class="car-ph-i">✈️</div>
+                <div class="car-ph-t">captures/af-dashboard-2.png<br>Analyse des vols</div>
+              </div>
+              <div class="car-caption">Analyse des vols — retards & performance</div>
+            </div>
+
+            <!-- SLIDE 3 -->
+            <div class="car-slide">
+              <img src="captures/airfrance/af-dashboard-3.png" alt="Dashboard Power BI Air France 3"
+                   onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+              <div class="car-ph" style="display:flex">
+                <div class="car-ph-i">🤖</div>
+                <div class="car-ph-t">captures/af-dashboard-3.png<br>Modèle ML / IA</div>
+              </div>
+              <div class="car-caption">Modèle ML — prédiction & pilotage IA</div>
+            </div>
+
+            <!-- SLIDE 4 -->
+            <div class="car-slide">
+              <img src="captures/airfrance/af-dashboard-4.png" alt="Dashboard Power BI Air France 4"
+                   onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+              <div class="car-ph" style="display:flex">
+                <div class="car-ph-i">💬</div>
+                <div class="car-ph-t">captures/af-dashboard-4.png<br>NLP verbatims</div>
+              </div>
+              <div class="car-caption">NLP — analyse des verbatims clients</div>
+            </div>
+
+            <!-- SLIDE 5 -->
+            <div class="car-slide">
+              <img src="captures/airfrance/af-dashboard-5.png" alt="Dashboard Power BI Air France 5"
+                   onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+              <div class="car-ph" style="display:flex">
+                <div class="car-ph-i">📈</div>
+                <div class="car-ph-t">captures/af-dashboard-5.png<br>Reporting COMEX</div>
+              </div>
+              <div class="car-caption">Reporting COMEX/CODIR — synthèse décisionnelle</div>
+            </div>
+
+          </div><!-- /track -->
+          <button class="car-btn car-prev" onclick="carMove('af',-1)">‹</button>
+          <button class="car-btn car-next" onclick="carMove('af', 1)">›</button>
+        </div><!-- /carrousel -->
+
+        <div class="car-dots" id="car-af-dots">
+          <button class="car-dot active" onclick="carGo('af',0)"></button>
+          <button class="car-dot" onclick="carGo('af',1)"></button>
+          <button class="car-dot" onclick="carGo('af',2)"></button>
+          <button class="car-dot" onclick="carGo('af',3)"></button>
+          <button class="car-dot" onclick="carGo('af',4)"></button>
+        </div>
+
+      </div><!-- /pb wrapper -->
+      <div class="pb">
+        <div class="étqs"><span class="étq">Power BI</span><span class="étq">DAX</span><span class="étq">NLP</span><span class="étq">MLOps</span><span class="étq">Air France</span></div>
+        <div class="pt">POC Opérations Aériennes — Dashboard IA · Air France</div>
+        <p class="pd">Tableaux de bord Power BI pour le pilotage décisionnel d'un POC IA. Coordination métier/technique, NLP verbatims clients, reporting KPIs jusqu'au COMEX/CODIR, MLOps Git & CI/CD.</p>
+        <div class="pile"><span class="pp-t">Power BI</span><span class="pp-t">DAX</span><span class="pp-t">Python NLP</span><span class="pp-t">Git CI/CD</span><span class="pp-t">MLOps</span></div>
+        <div class="mét">
+          <div><div class="mv">COMEX</div><div class="ml">reporting</div></div>
+          <div><div class="mv">ML + BI</div><div class="ml">expertise</div></div>
+          <div><div class="mv">POC IA</div><div class="ml">pilotage</div></div>
+          <div><div class="mv">5 vues</div><div class="ml">dashboards</div></div>
+        </div>
+        <div class="pp">
+          <a href="https://github.com/lyna-meryem" target="_blank" class="ghl"><svg viewBox="0 0 24 24"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/></svg>powerbi-airfrance</a>
+          <span class="rb">🔒 Confidentiel</span>
+        </div>
+      </div>
+    </div>
+
+
+    <!-- ═══ PROJET 2 — MERINAL avec 2 photos ═══ -->
+    <!-- 🖼️ Photo 1 : src="captures/merinal-1.png"  Photo 2 : src="captures/merinal-2.png" -->
+    <div class="pc app-z d2">
+      <div class="carrousel" id="car-mr">
+        <div class="car-track" id="car-mr-track">
+          <!-- SLIDE 1 -->
+          <div class="car-slide">
+            <img src="captures\merinal\merinal-2.png"
+                 onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+            <div class="car-ph" style="display:flex">
+              <div class="car-ph-i">💊</div>
+              <div class="car-ph-t">captures/merinal-1.png<br>Plan d'entrepôt optimisé</div>
+            </div>
+            <div class="car-caption">Plan d'affectation — avant / après</div>
+          </div>
+          <!-- SLIDE 2 -->
+          <div class="car-slide">
+            <img src="captures\merinal\merinal-3.png" alt="Merinal résultats 2"
+                 onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+            <div class="car-ph" style="display:flex">
+              <div class="car-ph-i">📈</div>
+              <div class="car-ph-t">captures/merinal-2.png<br>Résultats +18% / +25,5%</div>
+            </div>
+            <div class="car-caption">Résultats — +18 % espace · +25,5 % délai</div>
+          </div>
+        </div>
+        <button class="car-btn car-prev" onclick="carMove('mr',-1)">&#8249;</button>
+        <button class="car-btn car-next" onclick="carMove('mr', 1)">&#8250;</button>
+      </div>
+      <div class="car-dots" id="car-mr-dots">
+        <button class="car-dot active" onclick="carGo('mr',0)"></button>
+        <button class="car-dot" onclick="carGo('mr',1)"></button>
+      </div>
+      <div class="pb">
+        <div class="étqs"><span class="étq">Supply Chain</span><span class="étq">Optimisation</span><span class="étq">Pharma</span></div>
+        <div class="pt">Optimisation Entrepôt · Laboratoires Merinal</div>
+        <p class="pd">SLA & Order Picking : +18 % gain espace, +25,5 % délai commande. Analyse PIC/MRP, segmentation produits pharmaceutiques.</p>
+        <div class="pile"><span class="pp-t">Python</span><span class="pp-t">R</span><span class="pp-t">CPLEX</span><span class="pp-t">Excel</span></div>
+        <div class="mét"><div><div class="mv">+18 %</div><div class="ml">espace</div></div><div><div class="mv">+25,5 %</div><div class="ml">délai</div></div></div>
+        <div class="pp"><a href="https://github.com/lyna-meryem/Storage-Location-assignment-" target="_blank" class="ghl"><svg viewBox="0 0 24 24"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/></svg>supply-chain</a><span class="rb">★ —</span></div>
+      </div>
+    </div>
+
+    <!-- ═══ PROJET 3 — VEILLE RÉGLEMENTAIRE · SG ═══ -->
+    <!-- 🖼️ src="captures/veille-sg.png" -->
+    <div class="pc app-z d3">
+      <div class="vign">
+        <img class="cap" src="captures/SG/SG.png" alt="Veille réglementaire SG"
+             onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+        <div class="ph" style="display:flex"><div class="ph-i">🏦</div><div class="ph-t">captures/veille-sg.png</div></div>
+      </div>
+      <div class="pb">
+        <div class="étqs"><span class="étq">Agents IA</span><span class="étq">LLM</span><span class="étq">Finance</span></div>
+        <div class="pt">Veille Réglementaire · Société Générale</div>
+        <p class="pd">Agents IA pour automatiser la veille réglementaire bancaire. Pipeline LLM, extraction d'entités, alertes automatisées sur cas réel Société Générale.</p>
+        <div class="pile"><span class="pp-t">Python</span><span class="pp-t">LLM / Agents</span><span class="pp-t">NLP</span></div>
+        <div class="mét"><div><div class="mv">IA</div><div class="ml">agents auto</div></div><div><div class="mv">Veille</div><div class="ml">automatisée</div></div></div>
+        <div class="pp"><a href="https://github.com/lyna-meryem/Smart-regulatory-watch-tools" target="_blank" class="ghl"><svg viewBox="0 0 24 24"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/></svg>regulatory-watch</a><span class="rb">★ —</span></div>
+      </div>
+    </div>
+
+    <!-- ═══ PROJET 4 — ADIDAS · Dashboard Power BI (grande carte) ═══ -->
+    <!-- 🖼️ src="captures/adidas-powerbi.png" -->
+    <div class="pc G app-z d4">
+      <div class="vign">
+        <img class="cap" src="captures/adidas/adidas.png" alt="Dashboard Adidas Power BI"
+             onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+        <div class="ph" style="display:flex">
+          <div class="ph-i">👟</div>
+          <div class="ph-t">captures/adidas-powerbi.png<br>Dashboard ventes Power BI</div>
+        </div>
+      </div>
+      <div class="pb">
+        <div class="étqs"><span class="étq">Power BI</span><span class="étq">DAX</span><span class="étq">Ventes</span><span class="étq">Retail</span></div>
+        <div class="pt">Analyse des Ventes Adidas — Dashboard Power BI</div>
+        <p class="pd">Dashboard d'analyse des ventes Adidas : CA par région, produits, canaux de distribution. Modèle étoile, mesures DAX avancées (YTD, croissance, top produits), visuels interactifs.</p>
+        <div class="pile"><span class="pp-t">Power BI</span><span class="pp-t">DAX</span><span class="pp-t">Power Query</span><span class="pp-t">SQL</span></div>
+        <div class="mét">
+          <div><div class="mv">CA</div><div class="ml">analyse</div></div>
+          <div><div class="mv">DAX</div><div class="ml">mesures avancées</div></div>
+          <div><div class="mv">Retail</div><div class="ml">ventes multi-canaux</div></div>
+        </div>
+        <div class="pp"><a href="https://github.com/lyna-meryem/adidas-powerbi-dashboard" target="_blank" class="ghl"><svg viewBox="0 0 24 24"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/></svg>adidas-powerbi</a><span class="rb">★ —</span></div>
+      </div>
+    </div>
+
+  </div>
+  </div>
+</section>
+
+<!-- ══ COMPÉTENCES ══ -->
+<section id="competences">
+  <div class="sh app"><span class="sh-n">03</span><h2 class="sh-t">Compétences</h2><div class="sh-l"></div></div>
+
+  <!-- Rangée 1 : Gestion de projet mise en avant + 2 autres -->
+  <div class="cgrid">
+    <!-- VEDETTE : Gestion de projet -->
+    <div class="cc app-z d1">
+      <div class="cc-i">📋</div>
+      <h3>Gestion de Projet</h3>
+      <p>Coordination parties prenantes métiers/techniques, suivi jalons, animation réunions de pilotage, reporting COMEX/CODIR. PMO certifiée.</p>
+      <div class="barre"><div class="bf" data-w="92%"></div></div>
+    </div>
+    <div class="cc app-z d2">
+      <div class="cc-i">📊</div>
+      <h3>Power BI & DAX</h3>
+      <p>DAX avancé, Power Query M, modèles étoile, RLS, rapports paginés. Certifiée PL-300 Microsoft.</p>
+      <div class="barre"><div class="bf" data-w="95%"></div></div>
+    </div>
+    <div class="cc app-z d3">
+      <div class="cc-i">🐍</div>
+      <h3>Python & ML</h3>
+      <p>Pandas, NumPy, Sklearn, TensorFlow, PyTorch, NLP/LLM, MLOps Git & CI/CD.</p>
+      <div class="barre"><div class="bf" data-w="88%"></div></div>
+    </div>
+  </div>
+
+  <!-- Rangée 2 : 4 compétences -->
+  <div class="cgrid2">
+    <div class="cc app-z d1">
+      <div class="cc-i">🗄️</div>
+      <h3>SQL & Data Eng.</h3>
+      <p>SQL Server, Snowflake, R, QliK, Google Analytics, AWS, GCP, langage M.</p>
+      <div class="barre"><div class="bf" data-w="85%"></div></div>
+    </div>
+    <div class="cc app-z d2">
+      <div class="cc-i">🔢</div>
+      <h3>Recherche Opéra.</h3>
+      <p>CPLEX, Gurobi, Julia, GLPK, Pyomo, NetworkX, optimisation combinatoire.</p>
+      <div class="barre"><div class="bf" data-w="82%"></div></div>
+    </div>
+    <div class="cc app-z d3">
+      <div class="cc-i">🚚</div>
+      <h3>Supply Chain</h3>
+      <p>Ingénieure logistique, optimisation stocks, entrepôts, PIC/MRP, segmentation produits.</p>
+      <div class="barre"><div class="bf" data-w="88%"></div></div>
+    </div>
+    <div class="cc app-z d4">
+      <div class="cc-i">🤖</div>
+      <h3>IA & NLP</h3>
+      <p>LLM, agents IA, Transformers, sentiment analysis, clustering sémantique, MLOps.</p>
+      <div class="barre"><div class="bf" data-w="84%"></div></div>
+    </div>
+  </div>
+
+  <div class="app d5">
+    <div class="slbl">// Certifications</div>
+    <div class="certs">
+      <div class="cert">🏆 Microsoft PL-300 — Power BI Data Analyst</div>
+      <div class="cert">☁️ AWS Academy Machine Learning</div>
+      <div class="cert">🇫🇷 Français C2 &nbsp;·&nbsp; 🇬🇧 Anglais B2</div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ TERMINAL — EFFET HACKER ══ -->
+<section id="terminal-section" style="padding:80px 52px;background:var(--bg2);border-top:1px solid var(--border);border-bottom:1px solid var(--border);">
+  <div class="sh app"><span class="sh-n">✦</span><h2 class="sh-t">Sous le capot</h2><div class="sh-l"></div></div>
+  <p class="app" style="font-family:var(--alt);font-size:14px;color:var(--txt2);margin-bottom:36px;max-width:560px;">
+    Du vrai code, des vraies analyses, des vraies décisions data — et les chiffres qui le prouvent.
+  </p>
+
+  <!-- GRILLE : terminal gauche + graphiques droite -->
+  <div style="display:grid;grid-template-columns:1fr 400px;gap:28px;align-items:start;">
+
+    <!-- ── TERMINAL ── -->
+    <div class="terminal-wrap app">
+      <div class="term-topbar">
+        <div class="term-dots">
+          <span class="td td-red"></span>
+          <span class="td td-yellow"></span>
+          <span class="td td-green"></span>
+        </div>
+        <span class="term-title">lyna@data-analyst ~ python3 analyse.py</span>
+        <div style="width:52px"></div>
+      </div>
+      <div class="term-body" id="termBody">
+        <div class="term-line" id="termOutput"></div>
+        <span class="term-cursor" id="termCursor">▋</span>
+      </div>
+    </div>
+
+    <!-- ── GRAPHIQUES DATA ── -->
+    <div style="display:flex;flex-direction:column;gap:20px;" class="app d2">
+
+      <!-- Graphique 1 : CA mensuel Adidas (histogramme réel) -->
+      <div class="chart-card">
+        <div class="chart-title">📊 Chiffre d'affaires mensuel · Adidas 2024</div>
+        <div class="chart-subtitle">Simulation · données retail · Power BI</div>
+        <canvas id="chartVentes" width="360" height="170"></canvas>
+      </div>
+
+      <!-- Graphique 2 : Courbe gaussienne · Distribution des erreurs ML -->
+      <div class="chart-card">
+        <div class="chart-title">📈 Distribution des erreurs · Modèle ML</div>
+        <div class="chart-subtitle">POC Air France · résidus prédiction · μ≈0 · σ=0.18</div>
+        <canvas id="chartGauss" width="360" height="170"></canvas>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ══ STACK ══ -->
+<section id="stack">
+  <div class="sh app"><span class="sh-n">04</span><h2 class="sh-t">Stack technique</h2><div class="sh-l"></div></div>
+  <div class="sgrid">
+    <div class="sc app d1"><h4>📊 BI & Viz</h4><div class="sl2"><div class="si">Power BI · DAX Studio</div><div class="si">Power Query M · QliK</div><div class="si">Google Analytics · R</div></div></div>
+    <div class="sc app d2"><h4>🐍 Dev & Data</h4><div class="sl2"><div class="si">Python (Pandas · Sklearn)</div><div class="si">TensorFlow · PyTorch · LLM</div><div class="si">SQL Server · Snowflake · Java</div></div></div>
+    <div class="sc app d3"><h4>☁️ Cloud & MLOps</h4><div class="sl2"><div class="si">AWS · GCP / BigQuery</div><div class="si">Git · CI/CD · MLOps</div><div class="si">MS Project · Jira</div></div></div>
+    <div class="sc app d4"><h4>🔢 Optimisation</h4><div class="sl2"><div class="si">CPLEX · Gurobi · Julia</div><div class="si">Pyomo · NetworkX · GLPK</div><div class="si">Heuristiques · Méta-H</div></div></div>
+  </div>
+</section>
+
+<!-- ══ CONTACT ══ -->
+<section id="contact">
+  <div class="sh app"><span class="sh-n">05</span><h2 class="sh-t">Contact</h2><div class="sh-l"></div></div>
+  <div class="cgr">
+    <div class="cg app-g">
+      <h2>Travaillons<br><span>ensemble ✦</span></h2>
+      <p>Je recherche un <strong style="color:var(--txt)">CDI Analyste de Données en Île-de-France</strong>. Contactez-moi pour une opportunité ou un échange !</p>
+      <div class="ct-ls">
+        <a href="/cdn-cgi/l/email-protection#3b5742555a64565e49425e5664535a565a5f544e7b544e4f57545450155d49" class="ct-l"><div class="ct-i">✉️</div><div><div class="ct-n">E-mail</div><div class="ct-h"><span class="__cf_email__" data-cfemail="c0acb9aea19fada5b2b9a5ad9fa8a1ada1a4afb580afb5b4acafafabeea6b2">[email&#160;protected]</span></div></div><span class="ct-arr">→</span></a>
+        <a href="https://github.com/lyna-meryem" target="_blank" class="ct-l"><div class="ct-i"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/></svg></div><div><div class="ct-n">GitHub</div><div class="ct-h">github.com/lyna-meryem</div></div><span class="ct-arr">→</span></a>
+        <a href="https://linkedin.com/in/hamadou-lyna-meryem" target="_blank" class="ct-l"><div class="ct-i">💼</div><div><div class="ct-n">LinkedIn</div><div class="ct-h">hamadou-lyna-meryem</div></div><span class="ct-arr">→</span></a>
+        <a href="tel:0612557123" class="ct-l"><div class="ct-i">📱</div><div><div class="ct-n">Téléphone</div><div class="ct-h">06 12 55 71 23</div></div><span class="ct-arr">→</span></a>
+      </div>
+    </div>
+    <div class="app-d">
+      <form class="form" id="frm" action="https://formspree.io/f/REMPLACE-PAR-TON-ID" method="POST">
+        <div class="row2">
+          <div class="ch"><label>Prénom</label><input type="text" name="prenom" placeholder="Sophie" required></div>
+          <div class="ch"><label>Nom</label><input type="text" name="nom" placeholder="Martin" required></div>
+        </div>
+        <div class="ch"><label>E-mail</label><input type="email" name="email" placeholder="sophie@rh.fr" required></div>
+        <div class="ch">
+          <label>Objet</label>
+          <select name="objet">
+            <option value="" disabled selected>Sélectionner…</option>
+            <option>Proposition CDI Analyste de Données</option>
+            <option>Mission freelance</option>
+            <option>Collaboration académique</option>
+            <option>Question GitHub</option>
+            <option>Autre</option>
+          </select>
+        </div>
+        <div class="ch"><label>Message</label><textarea name="message" placeholder="Bonjour Lyna, je vous contacte pour…" required></textarea></div>
+        <button type="submit" class="btn-env">Envoyer mon message ✦</button>
+      </form>
+      <div class="suc" id="suc">
+        <div class="suc-i">✦</div>
+        <h3>Message envoyé !</h3>
+        <p>Lyna vous répond sous 48 h 💌</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="f-logo">Lyna Meryem HAMADOU ✦</div>
+  <a href="https://github.com/lyna-meryem" target="_blank" class="f-gh"><svg viewBox="0 0 24 24"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/></svg>@lyna-meryem</a>
+  <div class="f-copy">© 2026 Lyna Meryem HAMADOU</div>
+</footer>
+
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+/* curseur */
+const eD=document.getElementById('cd'),eR=document.getElementById('cr');
+let mx=0,my=0,rx=0,ry=0;
+document.addEventListener('mousemove',e=>{mx=e.clientX;my=e.clientY;eD.style.left=mx+'px';eD.style.top=my+'px';});
+(function t(){rx+=(mx-rx)*.11;ry+=(my-ry)*.11;eR.style.left=rx+'px';eR.style.top=ry+'px';requestAnimationFrame(t);})();
+document.querySelectorAll('a,button,.cc,.pc,.cert,.toggle,.hc').forEach(el=>{
+  el.addEventListener('mouseenter',()=>{eR.querySelector('div').style.cssText='width:52px;height:52px;opacity:.65;';});
+  el.addEventListener('mouseleave',()=>{eR.querySelector('div').style.cssText='width:34px;height:34px;opacity:.38;';});
+});
+
+/* toggle thème */
+const html=document.documentElement,tog=document.getElementById('tog');
+const sv=localStorage.getItem('lyna-th');if(sv)html.setAttribute('data-theme',sv);
+tog.addEventListener('click',()=>{const n=html.getAttribute('data-theme')==='light'?'dark':'light';html.setAttribute('data-theme',n);localStorage.setItem('lyna-th',n);});
+
+/* nav scroll */
+window.addEventListener('scroll',()=>document.getElementById('nav').classList.toggle('collée',scrollY>20));
+
+/* scroll reveal avec stagger */
+const obs=new IntersectionObserver(entries=>{
+  entries.forEach(e=>{
+    if(e.isIntersecting){
+      e.target.classList.add('v');
+      obs.unobserve(e.target);
+    }
+  });
+},{threshold:.06,rootMargin:'0px 0px -30px 0px'});
+document.querySelectorAll('.app,.app-g,.app-d,.app-z').forEach(el=>obs.observe(el));
+
+/* barres compétences */
+const bO=new IntersectionObserver(entries=>{
+  entries.forEach(e=>{
+    if(e.isIntersecting){
+      e.target.querySelectorAll('.bf').forEach(b=>b.style.width=b.dataset.w);
+    }
+  });
+},{threshold:.15});
+document.querySelectorAll('#competences').forEach(s=>bO.observe(s));
+
+/* formulaire */
+const f=document.getElementById('frm');
+if(f){f.addEventListener('submit',async e=>{
+  e.preventDefault();
+  const r=await fetch(f.action,{method:'POST',body:new FormData(f),headers:{Accept:'application/json'}});
+  if(r.ok){f.style.display='none';document.getElementById('suc').classList.add('v');}
+});}
+
+/* ═══ CARROUSELS ═══ */
+const carState = {};
+
+function carInit(id, total){
+  carState[id] = {idx:0, total};
+}
+
+function carMove(id, dir){
+  const s = carState[id];
+  s.idx = (s.idx + dir + s.total) % s.total;
+  carApply(id);
+}
+
+function carGo(id, idx){
+  carState[id].idx = idx;
+  carApply(id);
+}
+
+function carApply(id){
+  const s   = carState[id];
+  const trk = document.getElementById('car-'+id+'-track');
+  const dts = document.getElementById('car-'+id+'-dots');
+  if(trk) trk.style.transform = 'translateX(-'+s.idx+'00%)';
+  if(dts){
+    dts.querySelectorAll('.car-dot').forEach((d,i)=>{
+      d.classList.toggle('active', i===s.idx);
+    });
+  }
+}
+
+/* ═══ GRAPHIQUES DATA RÉELS ═══ */
+(function initCharts(){
+
+  const isDark = ()=> document.documentElement.getAttribute('data-theme')==='dark';
+
+  /* ── couleurs ── */
+  const AF   = '#005bac';
+  const RED  = '#e2001a';
+  const GREY = ()=> isDark() ? 'rgba(255,255,255,.07)' : 'rgba(0,0,0,.06)';
+  const TXT  = ()=> isDark() ? 'rgba(220,230,245,.65)'  : 'rgba(30,35,60,.55)';
+
+  function rr(ctx,x,y,w,h,r){
+    ctx.beginPath();
+    ctx.moveTo(x+r,y); ctx.lineTo(x+w-r,y);
+    ctx.quadraticCurveTo(x+w,y,x+w,y+r);
+    ctx.lineTo(x+w,y+h-r); ctx.quadraticCurveTo(x+w,y+h,x+w-r,y+h);
+    ctx.lineTo(x+r,y+h); ctx.quadraticCurveTo(x,y+h,x,y+h-r);
+    ctx.lineTo(x,y+r); ctx.quadraticCurveTo(x,y,x+r,y);
+    ctx.closePath();
+  }
+
+  /* ════════════════════════════════════
+     GRAPHIQUE 1 — CA mensuel Adidas
+     Histogramme animé avec courbe tendance
+  ════════════════════════════════════ */
+  function drawVentes(progress){
+    const cvs = document.getElementById('chartVentes');
+    if(!cvs) return;
+    const ctx = cvs.getContext('2d');
+    const W=360, H=170;
+    cvs.width=W; cvs.height=H;
+
+    const MOIS  = ['Jan','Fév','Mar','Avr','Mai','Jun','Jul','Aoû','Sep','Oct','Nov','Déc'];
+    const DATA  = [82,91,78,105,118,134,142,128,155,163,178,195]; // M€
+    const PREV  = [85,90,82,110,115,130,140,132,150,160,175,190]; // prévision
+
+    const maxV = 210;
+    const PAD  = {t:14, b:36, l:36, r:12};
+    const PW   = W - PAD.l - PAD.r;
+    const PH   = H - PAD.t - PAD.b;
+    const bW   = PW / MOIS.length;
+    const p    = Math.min(progress,1);
+
+    ctx.clearRect(0,0,W,H);
+
+    // grille horizontale
+    [0,.25,.5,.75,1].forEach(r=>{
+      const y = PAD.t + PH*(1-r);
+      ctx.strokeStyle = GREY(); ctx.lineWidth=.8;
+      ctx.beginPath(); ctx.moveTo(PAD.l,y); ctx.lineTo(W-PAD.r,y); ctx.stroke();
+      ctx.fillStyle = TXT(); ctx.font='9px "Space Grotesk",sans-serif'; ctx.textAlign='right';
+      ctx.fillText((maxV*r|0)+'M', PAD.l-4, y+3);
+    });
+
+    // barres
+    DATA.forEach((v,i)=>{
+      const x   = PAD.l + i*bW + bW*.15;
+      const bw  = bW*.7;
+      const bh  = (v/maxV)*PH*p;
+      const y   = PAD.t + PH - bh;
+
+      const g = ctx.createLinearGradient(0,y,0,y+bh);
+      g.addColorStop(0, AF);
+      g.addColorStop(1, AF+'88');
+      ctx.fillStyle = g;
+      rr(ctx,x,y,bw,bh,3); ctx.fill();
+
+      // valeur au-dessus
+      if(p>.8){
+        ctx.fillStyle = TXT(); ctx.font='bold 8px "Space Grotesk",sans-serif'; ctx.textAlign='center';
+        ctx.fillText(v+'M', x+bw/2, y-3);
+      }
+
+      // label mois
+      ctx.fillStyle = TXT(); ctx.font='9px "Space Grotesk",sans-serif'; ctx.textAlign='center';
+      ctx.fillText(MOIS[i], x+bw/2, H-PAD.b+14);
+    });
+
+    // courbe prévision pointillée
+    ctx.strokeStyle = RED; ctx.lineWidth=1.8;
+    ctx.setLineDash([5,3]);
+    ctx.beginPath();
+    PREV.forEach((v,i)=>{
+      const x = PAD.l + i*bW + bW*.5;
+      const y = PAD.t + PH - (v/maxV)*PH*p;
+      i===0 ? ctx.moveTo(x,y) : ctx.lineTo(x,y);
+    });
+    ctx.stroke(); ctx.setLineDash([]);
+
+    // légende
+    ctx.fillStyle = AF;   ctx.fillRect(PAD.l, H-10, 10, 6);
+    ctx.fillStyle = TXT(); ctx.font='9px "Space Grotesk",sans-serif'; ctx.textAlign='left';
+    ctx.fillText('CA réel', PAD.l+13, H-5);
+    ctx.strokeStyle = RED; ctx.lineWidth=1.5; ctx.setLineDash([4,2]);
+    ctx.beginPath(); ctx.moveTo(PAD.l+70,H-7); ctx.lineTo(PAD.l+80,H-7); ctx.stroke();
+    ctx.setLineDash([]); ctx.fillText('Prévision', PAD.l+83, H-5);
+  }
+
+  /* ════════════════════════════════════
+     GRAPHIQUE 2 — Courbe gaussienne
+     Distribution résidus modèle ML Air France
+  ════════════════════════════════════ */
+  function drawGauss(progress){
+    const cvs = document.getElementById('chartGauss');
+    if(!cvs) return;
+    const ctx = cvs.getContext('2d');
+    const W=360, H=170;
+    cvs.width=W; cvs.height=H;
+
+    const PAD = {t:14,b:36,l:40,r:12};
+    const PW  = W - PAD.l - PAD.r;
+    const PH  = H - PAD.t - PAD.b;
+    const p   = Math.min(progress,1);
+
+    const mu  = 0.02;    // légère erreur systématique
+    const sig = 0.18;
+    const gauss = x => Math.exp(-0.5*((x-mu)/sig)**2) / (sig*Math.sqrt(2*Math.PI));
+
+    const XMIN=-0.6, XMAX=0.6;
+    const STEPS=120;
+    const dx = (XMAX-XMIN)/STEPS;
+    const YMAX= gauss(mu)*1.08;
+
+    ctx.clearRect(0,0,W,H);
+
+    // axes
+    const toCanvasX = x => PAD.l + ((x-XMIN)/(XMAX-XMIN))*PW;
+    const toCanvasY = y => PAD.t + PH - (y/YMAX)*PH*p;
+    const zeroY = PAD.t+PH;
+
+    // grille
+    [-0.4,-0.2,0,0.2,0.4].forEach(xv=>{
+      const cx2 = toCanvasX(xv);
+      ctx.strokeStyle = GREY(); ctx.lineWidth=.8;
+      ctx.beginPath(); ctx.moveTo(cx2,PAD.t); ctx.lineTo(cx2,zeroY); ctx.stroke();
+      ctx.fillStyle=TXT(); ctx.font='9px "Space Grotesk",sans-serif'; ctx.textAlign='center';
+      ctx.fillText(xv.toFixed(1), cx2, zeroY+12);
+    });
+    [.5,1,1.5,2].forEach(yv=>{
+      const yy = PAD.t+PH-(yv/YMAX)*PH*p;
+      if(yy<PAD.t) return;
+      ctx.strokeStyle=GREY(); ctx.lineWidth=.8;
+      ctx.beginPath(); ctx.moveTo(PAD.l,yy); ctx.lineTo(W-PAD.r,yy); ctx.stroke();
+    });
+
+    // axe X
+    ctx.strokeStyle=isDark()?'rgba(255,255,255,.2)':'rgba(0,0,0,.2)';
+    ctx.lineWidth=1;
+    ctx.beginPath(); ctx.moveTo(PAD.l,zeroY); ctx.lineTo(W-PAD.r,zeroY); ctx.stroke();
+
+    // zone ±1σ (remplie)
+    ctx.beginPath();
+    ctx.moveTo(toCanvasX(mu-sig), zeroY);
+    for(let i=0;i<=STEPS;i++){
+      const xv = XMIN + i*dx;
+      if(xv < mu-sig || xv > mu+sig) continue;
+      ctx.lineTo(toCanvasX(xv), toCanvasY(gauss(xv)));
+    }
+    ctx.lineTo(toCanvasX(mu+sig), zeroY);
+    ctx.closePath();
+    ctx.fillStyle = AF+'30'; ctx.fill();
+
+    // courbe principale
+    const grad = ctx.createLinearGradient(PAD.l,0,W-PAD.r,0);
+    grad.addColorStop(0,   RED+'aa');
+    grad.addColorStop(0.5, AF);
+    grad.addColorStop(1,   RED+'aa');
+    ctx.strokeStyle = grad; ctx.lineWidth=2.5;
+    ctx.beginPath();
+    for(let i=0;i<=STEPS;i++){
+      const xv = XMIN + i*dx;
+      const yv = gauss(xv);
+      const cx2 = toCanvasX(xv);
+      const cy2 = toCanvasY(yv);
+      i===0 ? ctx.moveTo(cx2,cy2) : ctx.lineTo(cx2,cy2);
+    }
+    ctx.stroke();
+
+    // ligne μ
+    ctx.strokeStyle='rgba(226,0,26,.6)'; ctx.lineWidth=1.2; ctx.setLineDash([4,3]);
+    ctx.beginPath(); ctx.moveTo(toCanvasX(mu),PAD.t+4); ctx.lineTo(toCanvasX(mu),zeroY); ctx.stroke();
+    ctx.setLineDash([]);
+
+    // annotations
+    if(p>.7){
+      ctx.fillStyle=RED; ctx.font='bold 9px "Space Grotesk",sans-serif'; ctx.textAlign='center';
+      ctx.fillText('μ='+mu.toFixed(2), toCanvasX(mu), PAD.t+10);
+      ctx.fillStyle=AF; ctx.textAlign='left';
+      ctx.fillText('±1σ', toCanvasX(mu+sig)+4, toCanvasY(gauss(mu+sig))-2);
+    }
+
+    // labels axes
+    ctx.fillStyle=TXT(); ctx.font='9px "Space Grotesk",sans-serif'; ctx.textAlign='center';
+    ctx.fillText('Résidus (erreur prédiction)', W/2, H-4);
+    ctx.save(); ctx.translate(10, H/2); ctx.rotate(-Math.PI/2);
+    ctx.fillText('Densité', 0, 0); ctx.restore();
+  }
+
+  /* ── Animation au scroll ── */
+  let animStarted = false;
+  let animT = 0;
+
+  function animate(){
+    animT += 0.04;
+    drawVentes(animT);
+    drawGauss(animT);
+    if(animT < 1) requestAnimationFrame(animate);
+    else { drawVentes(1); drawGauss(1); }
+  }
+
+  const obs = new IntersectionObserver(entries=>{
+    entries.forEach(e=>{
+      if(e.isIntersecting && !animStarted){
+        animStarted = true;
+        setTimeout(animate, 300);
+        obs.unobserve(e.target);
+      }
+    });
+  },{threshold:.2});
+
+  const ts = document.getElementById('terminal-section');
+  if(ts){ obs.observe(ts); drawVentes(0); drawGauss(0); }
+
+  // redessine si toggle thème
+  document.getElementById('tog')?.addEventListener('click',()=>{
+    setTimeout(()=>{ drawVentes(1); drawGauss(1); }, 80);
+  });
+})();
+
+/* ═══ TERMINAL — MOTEUR DE FRAPPE ═══ */
+(function initTerminal(){
+
+  // Séquence complète de ce qui s'affiche
+  // Chaque objet = { text, class, delay }
+  // delay = pause AVANT d'afficher cette ligne (ms)
+  const SCRIPT = [
+    // prompt 1
+    {t:'lyna@air-france:~$ ', c:'t-prompt', d:400},
+    {t:'python3 poc_flight_keys.py', c:'t-cmd', d:0, nl:true},
+    {t:'', d:300, blank:true},
+    {t:'# Chargement des données opérations aériennes...', c:'t-comment', d:0, nl:true},
+    {t:'import pandas as pd', c:'t-kw', d:80, nl:true},
+    {t:'import ', c:'t-kw', d:60},
+    {t:'powerbi_api ', c:'t-fn', d:0},
+    {t:'as pbi', c:'t-cmd', d:0, nl:true},
+    {t:'from ', c:'t-kw', d:60},
+    {t:'sklearn.preprocessing ', c:'t-fn', d:0},
+    {t:'import ', c:'t-kw', d:0},
+    {t:'StandardScaler', c:'t-fn', d:0, nl:true},
+    {t:'', d:200, blank:true},
+    {t:'df = pd.read_csv(', c:'t-cmd', d:0},
+    {t:'"flights_2025.csv"', c:'t-string', d:0},
+    {t:')', c:'t-cmd', d:0, nl:true},
+    {t:'', d:350, blank:true},
+    {t:'✔  ', c:'t-green', d:0},
+    {t:'Données chargées — ', c:'t-cmd', d:0},
+    {t:'124 832', c:'t-num', d:0},
+    {t:' vols · ', c:'t-cmd', d:0},
+    {t:'18 colonnes', c:'t-yellow', d:0, nl:true},
+    {t:'', d:400, blank:true},
+
+    // prompt 2 — analyse KPIs
+    {t:'lyna@air-france:~$ ', c:'t-prompt', d:300},
+    {t:'./build_dashboard.py --kpi all', c:'t-cmd', d:0, nl:true},
+    {t:'', d:200, blank:true},
+    {t:'Calcul indicateurs Power BI...', c:'t-comment', d:0, nl:true},
+    {t:'  OTP (On-Time Performance) : ', c:'t-cmd', d:120},
+    {t:'87.4 %', c:'t-green', d:0, nl:true},
+    {t:'  Retard moyen             : ', c:'t-cmd', d:80},
+    {t:'12.3 min', c:'t-yellow', d:0, nl:true},
+    {t:'  Taux annulation          : ', c:'t-cmd', d:80},
+    {t:'1.8 %', c:'t-green', d:0, nl:true},
+    {t:'  Satisfaction passagers   : ', c:'t-cmd', d:80},
+    {t:'4.2 / 5', c:'t-green', d:0, nl:true},
+    {t:'', d:300, blank:true},
+    {t:'✔  ', c:'t-green', d:0},
+    {t:'Dashboard ', c:'t-cmd', d:0},
+    {t:'POC_FlightKeys_v3.pbix', c:'t-af', d:0},
+    {t:' publié → COMEX', c:'t-green', d:0, nl:true},
+    {t:'', d:500, blank:true},
+
+    // prompt 3 — NLP
+    {t:'lyna@air-france:~$ ', c:'t-prompt', d:300},
+    {t:'python3 nlp_verbatims.py', c:'t-cmd', d:0, nl:true},
+    {t:'', d:200, blank:true},
+    {t:'Analyse sentiment ', c:'t-comment', d:0},
+    {t:'8 420', c:'t-num', d:0},
+    {t:' verbatims clients...', c:'t-comment', d:0, nl:true},
+    {t:'  Positif   ████████████  ', c:'t-cmd', d:150},
+    {t:'62 %', c:'t-green', d:0, nl:true},
+    {t:'  Neutre    ████████      ', c:'t-cmd', d:100},
+    {t:'28 %', c:'t-yellow', d:0, nl:true},
+    {t:'  Négatif   ███           ', c:'t-cmd', d:100},
+    {t:'10 %', c:'t-kw', d:0, nl:true},
+    {t:'', d:400, blank:true},
+
+    // prompt 4 — Supply Chain Adidas
+    {t:'lyna@data:~$ ', c:'t-prompt', d:400},
+    {t:'dax_query "Adidas_Sales.pbix"', c:'t-cmd', d:0, nl:true},
+    {t:'', d:200, blank:true},
+    {t:'// Mesure DAX — Croissance YTD', c:'t-comment', d:0, nl:true},
+    {t:'Revenue YTD = ', c:'t-fn', d:80},
+    {t:'TOTALYTD(', c:'t-kw', d:0, nl:true},
+    {t:'    SUM(Sales[Revenue]),', c:'t-cmd', d:60, nl:true},
+    {t:"    'Date'[Date]", c:'t-string', d:60, nl:true},
+    {t:')', c:'t-kw', d:0, nl:true},
+    {t:'', d:300, blank:true},
+    {t:'✔  ', c:'t-green', d:0},
+    {t:'CA Total 2024 : ', c:'t-cmd', d:0},
+    {t:'$1.42B', c:'t-af', d:0},
+    {t:' · Croissance : ', c:'t-cmd', d:0},
+    {t:'+23.4 %', c:'t-green', d:0, nl:true},
+    {t:'', d:600, blank:true},
+
+    // fin — invite vide
+    {t:'lyna@data:~$ ', c:'t-prompt', d:400},
+  ];
+
+  const output = document.getElementById('termOutput');
+  const cursor = document.getElementById('termCursor');
+  if(!output) return;
+
+  let globalIdx   = 0;   // index dans SCRIPT
+  let charIdx     = 0;   // index dans le texte courant
+  let currentSpan = null;
+  let running     = false;
+
+  function nextToken(){
+    if(globalIdx >= SCRIPT.length){
+      // terminé — curseur reste
+      return;
+    }
+    const tok = SCRIPT[globalIdx];
+
+    // délai avant ce token
+    setTimeout(()=>{
+      if(tok.blank){
+        const br = document.createElement('span');
+        br.className = 't-blank';
+        output.appendChild(br);
+        globalIdx++;
+        nextToken();
+        return;
+      }
+
+      // créer le span pour ce token
+      currentSpan = document.createElement('span');
+      if(tok.c) currentSpan.className = tok.c;
+      output.appendChild(currentSpan);
+
+      // insérer curseur après le span courant
+      output.parentNode.appendChild(cursor);
+
+      typeText(tok.t, tok.nl || false, ()=>{
+        globalIdx++;
+        charIdx = 0;
+        nextToken();
+      });
+    }, tok.d || 0);
+  }
+
+  function typeText(text, addNl, cb){
+    if(charIdx >= text.length){
+      if(addNl){
+        currentSpan.insertAdjacentHTML('afterend','<br>');
+      }
+      cb();
+      return;
+    }
+    // Vitesse variable : plus rapide sur les commentaires, lente sur les commandes
+    const speed = text.startsWith('#') || text.startsWith('//') ? 18
+                : text.length > 40 ? 12
+                : 28;
+
+    currentSpan.textContent += text[charIdx];
+    charIdx++;
+    // scroll auto
+    output.parentNode.scrollTop = output.parentNode.scrollHeight;
+    setTimeout(()=>typeText(text, addNl, cb), speed + Math.random()*14);
+  }
+
+  // Lance quand la section est visible
+  const termObs = new IntersectionObserver(entries=>{
+    entries.forEach(e=>{
+      if(e.isIntersecting && !running){
+        running = true;
+        setTimeout(nextToken, 600);
+        termObs.unobserve(e.target);
+      }
+    });
+  },{threshold:.25});
+  const ts = document.getElementById('terminal-section');
+  if(ts) termObs.observe(ts);
+})();
+
+/* ═══ COMPTEUR ANIMÉ ═══ */
+const counterObs = new IntersectionObserver(entries=>{
+  entries.forEach(e=>{
+    if(!e.isIntersecting) return;
+    e.target.querySelectorAll('.stat-num').forEach(el=>{
+      const target  = +el.dataset.target;
+      const suffix  = el.dataset.suffix || '';
+      const dur     = 1800;
+      const step    = dur / 60;
+      let cur = 0;
+      const inc = target / (dur / step);
+      const timer = setInterval(()=>{
+        cur = Math.min(cur + inc, target);
+        el.textContent = (Number.isInteger(target)
+          ? Math.round(cur)
+          : cur.toFixed(1)) + suffix;
+        if(cur >= target) clearInterval(timer);
+      }, step);
+    });
+    counterObs.unobserve(e.target);
+  });
+},{threshold:.3});
+const statsSection = document.getElementById('chiffres');
+if(statsSection) counterObs.observe(statsSection);
+
+// auto-play carrousels
+carInit('af', 5);
+carInit('mr', 2);
+setInterval(()=>carMove('af',1), 3500);
+setInterval(()=>carMove('mr',1), 4200);
+</script>
+</body>
+</html>
