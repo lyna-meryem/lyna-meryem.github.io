@@ -834,31 +834,136 @@ footer{padding:26px 52px;border-top:1px solid var(--border);display:flex;align-i
   opacity:0;animation:iQ .4s ease 2.3s forwards;
 }
 
+/* ── HAMBURGER ── */
+.ham{
+  display:none;flex-direction:column;justify-content:center;gap:5px;
+  background:none;border:none;cursor:pointer;padding:6px 4px;flex-shrink:0;
+}
+.ham span{display:block;width:22px;height:2px;background:var(--txt);border-radius:2px;transition:transform .3s,opacity .3s,background .45s;}
+.ham.open span:nth-child(1){transform:translateY(7px) rotate(45deg);}
+.ham.open span:nth-child(2){opacity:0;transform:scaleX(0);}
+.ham.open span:nth-child(3){transform:translateY(-7px) rotate(-45deg);}
+
+.mob-menu{
+  display:none;position:fixed;top:57px;left:0;right:0;bottom:0;z-index:190;
+  background:var(--bg);border-top:1px solid var(--border);
+  flex-direction:column;padding:28px 24px 40px;gap:0;overflow-y:auto;
+  transition:background .45s;
+}
+.mob-menu.open{display:flex;}
+.mob-menu a{
+  font-family:var(--font);font-size:24px;font-weight:800;letter-spacing:-.02em;
+  color:var(--txt);text-decoration:none;
+  padding:15px 0;border-bottom:1px solid var(--border);
+  transition:color .2s,padding-left .2s;
+}
+.mob-menu a:hover{color:var(--c1);padding-left:6px;}
+.mob-hire{
+  margin-top:28px;border-bottom:none !important;
+  display:inline-flex !important;align-items:center;
+  padding:14px 28px !important;background:var(--grad);color:#fff !important;
+  border-radius:100px;font-size:15px !important;width:fit-content;
+}
+.mob-hire:hover{opacity:.9;padding-left:28px !important;}
+
+/* ── TABLET ── */
+@media(max-width:900px){
+  #hero{grid-template-columns:1fr;gap:36px;padding:110px 36px 64px;}
+  .h-dr{max-width:480px;}
+  .pgrid{grid-template-columns:1fr 1fr;}
+  .pc.G{grid-column:span 2;}
+  .cgrid2{grid-template-columns:repeat(2,1fr);}
+  #terminal-section>div{grid-template-columns:1fr !important;}
+  #terminal-section>div>div:last-child{display:none !important;}
+  .cgr{grid-template-columns:1fr;gap:36px;}
+}
+
 /* ── MOBILE ── */
 @media(max-width:640px){
-  #intro{padding:24px;}
-  .intro-guillemet{font-size:52px;}
-  .intro-quote{font-size:17px;line-height:1.5;}
-  .intro-author{font-size:10px;}
-  .intro-sig-name{font-size:11px;}
-  nav{padding:14px 20px;}
-  .nav-liens{display:none;}
-  .btn-nav{display:none;}
-  #hero{padding:100px 22px 60px;flex-direction:column;gap:32px;}
-  .h-dr{grid-template-columns:1fr 1fr;gap:10px;}
-  .hc{padding:14px;}
-  .ctas{flex-direction:column;gap:10px;}
-  .ctas a{width:100%;justify-content:center;}
-  #a-propos{padding:60px 22px;}
-  .ap-wrap{flex-direction:column;gap:28px;}
-  .form-row{grid-template-columns:1fr;}
-  #projets{padding:60px 22px;}
-  .pgrid,.pgrid2{grid-template-columns:1fr;}
-  #competences{padding:60px 22px;}
-  .cgrid{grid-template-columns:1fr;}
+  /* NAV */
+  .ham{display:flex;}
+  .nav-liens,.btn-nav{display:none !important;}
+  nav{padding:13px 18px;}
+
+  /* INTRO */
+  #intro{padding:28px 22px;}
+  .intro-inner{max-width:100%;}
+  .intro-guillemet{font-size:46px;}
+  .intro-quote{font-size:16px;line-height:1.55;}
+  .intro-sep{margin-bottom:12px;}
+  .intro-author,.intro-sig-role{font-size:10px;}
+  .intro-sig-name{font-size:11px;letter-spacing:.08em;}
+
+  /* HERO */
+  #hero{
+    padding:84px 18px 52px;
+    grid-template-columns:1fr;gap:32px;min-height:auto;
+  }
+  h1{font-size:clamp(36px,10vw,52px);}
+  .h-desc{font-size:13.5px;line-height:1.7;max-width:100%;}
+  .ctas{flex-direction:column;gap:9px;}
+  .ctas a{width:100%;justify-content:center;text-align:center;}
+  .badges{gap:5px;}
+  .h-dr{flex-direction:column;gap:8px;}
+  .hc{padding:13px 15px;}
+  .hc-v{font-size:13px;}
+  .hc-s{font-size:10px;}
+
+  /* SECTION HEADERS */
+  .sh-t{font-size:22px;}
+  .sh{margin-bottom:28px;}
+
+  /* ABOUT */
+  #a-propos{padding:52px 18px;}
+  .ap-wrap{grid-template-columns:1fr;gap:24px;}
+  .app-g{display:flex;flex-direction:column;align-items:center;}
+  .photo-frame{width:140px;height:172px;}
+  .ap-p{font-size:13.5px;}
+  .fr-r{font-size:12px;}
+  .fr-detail{font-size:10.5px;}
+  .form-row{grid-template-columns:1fr !important;}
+  .form-row .fc{grid-column:1 !important;}
+
+  /* PROJECTS */
+  #projets{padding:52px 18px;}
+  .pgrid{grid-template-columns:1fr !important;}
+  .pc.G{grid-column:1 !important;}
+  .pc.G .vign{height:175px;}
+  .vign{height:155px;}
+  .pb{padding:14px;}
+  .pt{font-size:13px;}
+
+  /* SKILLS */
+  #competences{padding:52px 18px;}
+  .cgrid{grid-template-columns:1fr !important;}
   .cgrid2{grid-template-columns:1fr 1fr;}
-  #contact{padding:60px 22px;}
-  .cgr{grid-template-columns:1fr;}
+  .cc{padding:15px;}
+  .cc-i{width:34px;height:34px;margin-bottom:10px;}
+  .cc h3{font-size:12px;}
+  .cc p{font-size:10.5px;}
+
+  /* TERMINAL */
+  #terminal-section{padding:52px 18px !important;}
+  #terminal-section>div{grid-template-columns:1fr !important;}
+  #terminal-section>div>div:last-child{display:none !important;}
+  .term-body{min-height:180px;font-size:11px;padding:14px 16px;}
+  .term-title{font-size:9px;letter-spacing:.02em;}
+
+  /* CONTACT */
+  #contact{padding:52px 18px;}
+  .cgr{grid-template-columns:1fr;gap:28px;}
+  .cg h2{font-size:26px;}
+  .cg p{font-size:13px;}
+  .ct-l{padding:11px 14px;}
+  .ch input,.ch textarea,.ch select{font-size:14px;}
+
+  /* FOOTER */
+  footer{padding:18px 20px;flex-direction:column;gap:8px;text-align:center;}
+}
+
+@media(max-width:380px){
+  .cgrid2{grid-template-columns:1fr;}
+  h1{font-size:32px;}
 }
 </style>
 </head>
@@ -898,8 +1003,20 @@ footer{padding:26px 52px;border-top:1px solid var(--border);display:flex;align-i
       <span class="tog-i">🌙</span>
     </div>
     <a href="#contact" class="btn-nav" data-en="Hire me →">Me recruter →</a>
+    <button class="ham" id="ham" aria-label="Menu" onclick="toggleMob()">
+      <span></span><span></span><span></span>
+    </button>
   </div>
 </nav>
+
+<!-- ── MENU MOBILE ── -->
+<div class="mob-menu" id="mobMenu">
+  <a href="#a-propos" onclick="closeMob()" data-en="About">À propos</a>
+  <a href="#projets" onclick="closeMob()" data-en="Projects">Projets</a>
+  <a href="#competences" onclick="closeMob()" data-en="Skills">Compétences</a>
+  <a href="#contact" onclick="closeMob()" data-en="Contact">Contact</a>
+  <a href="#contact" onclick="closeMob()" class="mob-hire" data-en="Hire me →">Me recruter →</a>
+</div>
 
 <!-- ══ HERO ══ -->
 <section id="hero">
@@ -1626,6 +1743,23 @@ function toggleLang(){
 (function(){
   if(localStorage.getItem('lyna-lang')==='en') toggleLang();
 })();
+
+/* menu mobile */
+function toggleMob(){
+  const h=document.getElementById('ham'),m=document.getElementById('mobMenu');
+  h.classList.toggle('open');m.classList.toggle('open');
+  document.body.style.overflow=m.classList.contains('open')?'hidden':'';
+}
+function closeMob(){
+  document.getElementById('ham').classList.remove('open');
+  document.getElementById('mobMenu').classList.remove('open');
+  document.body.style.overflow='';
+}
+/* ferme le menu si on clique en dehors */
+document.addEventListener('click',e=>{
+  const m=document.getElementById('mobMenu');
+  if(m.classList.contains('open')&&!m.contains(e.target)&&!document.getElementById('ham').contains(e.target))closeMob();
+});
 
 /* accordéon expériences */
 document.querySelectorAll('.fr-i').forEach(el=>{
